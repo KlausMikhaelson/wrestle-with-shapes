@@ -15,4 +15,8 @@ const io = new Server(server, {
     }
 })
 
-app.listen(3000, () => console.log("server is running"))
+io.on("connection", (socket) => {
+    console.log(`User with user id ${socket.id} has been connected`)
+})
+
+server.listen(3001, () => console.log("server is running"))
