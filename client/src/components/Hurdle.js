@@ -1,17 +1,57 @@
 import { useBox } from "@react-three/cannon";
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import { useKeyboard } from "../hooks/Keyboard";
+import { useFrame, useThree } from "@react-three/fiber";
+import { Vector3 } from "three";
+
+const speed_2 = 4
 
 const Hurdle = () => {
 
-    const [ref] = useBox(() => ({
+    const [ref, api_2] = useBox(() => ({
         mass: 1,
         type: "Dynamic",
         position: [4, 0.7, 3]
     }))
+    
+    const vel_2 = useRef([0,0,0])
+    const {stepBackward_2, stepForward_2, stepRight_2, stepLeft_2} = useKeyboard()
+    useEffect(() => {
+        api_2.velocity.subscribe((v) => vel_2.current = v)
+    }, [api_2.velocity])
 
-    return(
+    const pos_2 = useRef([0, 0, 0])
+    useEffect(() => {
+        api_2.position.subscribe((p) => pos_2.current = p)
+        console.log(pos_2)
+    }, [api_2.position])
+
+    useFrame(() => {
+        const direction = new Vector3()
+        const frontVector = new Vector3(
+            0,
+            0,
+            (stepBackward_2 ? 1 : 0) - (stepForward_2 ? 1 : 0)
+        )
+        const sideVector = new Vector3(
+            (stepLeft_2 ? 1 : 0) - (stepRight_2 ? 1 : 0),
+            0,
+            0,
+        )
+
+        direction
+            .subVectors(frontVector, sideVector)
+            .normalize()
+            .multiplyScalar(speed_2)
+            .applyEuler(camera.rotation)
+
+            api_2.velocity.set(direction.x,vel_2.current[1],direction.z)
+    })
+    const {camera} = useThree()
+
+    return (
         <>
-        <mesh ref={ref}>
+            <mesh ref={ref}>
                 <boxBufferGeometry attach="geometry" />
                 <meshStandardMaterial color="blue" attach='material' />
             </mesh>
