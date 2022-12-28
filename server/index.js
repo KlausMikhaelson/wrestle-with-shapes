@@ -18,9 +18,10 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
     console.log(`User with user id ${socket.id} has been connected`)
 
-    socket.on("new_player", (p) => {
-        socket.emit("msg_received", p)
+    socket.on("player", (data) => {
+        console.log(data)
     })
+
 })
 
 server.listen(3001, () => console.log("server is running"))
