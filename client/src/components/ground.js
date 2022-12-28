@@ -8,7 +8,7 @@ const Ground = () => {
     
   return (
     <mesh ref={ref}>
-        <planeBufferGeometry attach='geometry' args={[100, 100]} /> 
+        <planeBufferGeometry attach='geometry' args={[20, 20]} /> 
         <meshStandardMaterial color="hotpink" attach='material'/>
     </mesh>
   )
