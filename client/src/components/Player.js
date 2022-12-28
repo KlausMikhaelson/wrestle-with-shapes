@@ -47,6 +47,12 @@ const Player = () => {
 
             api.velocity.set(direction.x,vel.current[1],direction.z)
     })
+    const itemPos_2 = [Math.round(pos.current[0]), Math.round(pos.current[1]), Math.round(pos.current[2])];
+    console.log(itemPos_2)
+    if(itemPos_2[2] > 10 || itemPos_2[0] > 10 || itemPos_2[2] < -10 || itemPos_2[0] < -10) {
+        console.log("Red lose")
+        alert("Blue Won")
+    }
 
     const { camera } = useThree()
 
@@ -54,7 +60,7 @@ const Player = () => {
         <>
             <mesh ref={ref}>
                 <boxBufferGeometry attach="geometry" />
-                <meshStandardMaterial color="gray" attach='material' />
+                <meshStandardMaterial color="Red" attach='material' />
             </mesh>
         </>
     )

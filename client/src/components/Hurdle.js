@@ -3,10 +3,15 @@ import React, { useRef, useEffect } from "react";
 import { useKeyboard } from "../hooks/Keyboard";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
+// import { useHistory } from 'react-router-dom';
+import {Navigate, useNavigate} from "react-router-dom"
 
 const speed_2 = 4
 
+
 const Hurdle = () => {
+    
+    // const navigate = useNavigate();
 
     const [ref, api_2] = useBox(() => ({
         mass: 1,
@@ -55,6 +60,7 @@ const Hurdle = () => {
     console.log(itemPos)
     if(itemPos[2] > 10 || itemPos[0] > 10 || itemPos[2] < -10 || itemPos[0] < -10) {
         console.log("Blue lose")
+        alert("Red Won")
     }
 
     return (
