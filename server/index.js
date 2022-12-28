@@ -15,11 +15,20 @@ const io = new Server(server, {
     }
 })
 
+let clients = {}
+
 io.on("connection", (socket) => {
     console.log(`User with user id ${socket.id} has been connected`)
 
-    socket.on("player", (data) => {
-        console.log(data)
+    clients[socket.id] = {
+        position: [4, 5, 3]
+    }
+
+    io.emit('player', clients)
+
+    socket.on("player", ({id, position}) => {
+        clients[id].position = position
+        console.log(clients[id].position)
     })
 
 })

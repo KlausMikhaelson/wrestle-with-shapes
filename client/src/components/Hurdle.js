@@ -14,6 +14,7 @@ const speed_2 = 4
 const Hurdle = () => {
     
     // const navigate = useNavigate();
+    const { id } = socket
 
     const [ref, api_2] = useBox(() => ({
         mass: 1,
@@ -58,9 +59,10 @@ const Hurdle = () => {
 
     })
 
-    const posArray = [pos_2.current]
+    const posArray = pos_2.current
 
     socket.emit("player", {
+        id,
         position: posArray
     })
     const {camera} = useThree()
