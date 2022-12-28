@@ -1,19 +1,22 @@
 import { Canvas } from '@react-three/fiber';
-import {OrbitControls} from "@react-three/drei"
+import {Environment, OrbitControls} from "@react-three/drei"
 import Ground from './components/ground';
 import Player from './components/Player';
 import './App.css';
 import io from "socket.io-client"
 import { Physics } from '@react-three/cannon';
 import Hurdle from './components/Hurdle';
+import { useEnvironment } from '@react-three/drei';
 // const socket = io.connect("http://localhost:3001")
 
 
 function App() {
 
+  const envMap = useEnvironment({path: "/environment"})
+
   return (
     <div className="App">
-      <Canvas camera={{position:[0, 20, 0]}}>
+      <Canvas camera={{position:[20, 15, 0]}}>
         <OrbitControls />
         <ambientLight />
         <Physics>
@@ -21,6 +24,7 @@ function App() {
           <Player />
         <Ground />
         </Physics>
+        <Environment map={envMap} background />
       </Canvas>
     </div>
   );
