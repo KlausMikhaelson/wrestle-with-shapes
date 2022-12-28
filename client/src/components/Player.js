@@ -13,7 +13,7 @@ const Player = () => {
     const [ref, api] = useBox(() => ({
         mass: 1,
         type: "Dynamic",
-        position: [0, 0.7, 3]
+        position: [0, 4, 3]
     }))
     const vel = useRef([0, 0, 0])
     const { stepBackward, stepForward, stepRight, stepLeft, jump } = useKeyboard()

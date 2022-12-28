@@ -11,19 +11,19 @@ const Hurdle = () => {
     const [ref, api_2] = useBox(() => ({
         mass: 1,
         type: "Dynamic",
-        position: [4, 0.7, 3]
+        position: [4, 5, 3]
     }))
     
     const vel_2 = useRef([0,0,0])
     const {stepBackward_2, stepForward_2, stepRight_2, stepLeft_2} = useKeyboard()
     useEffect(() => {
         api_2.velocity.subscribe((v) => vel_2.current = v)
+        console.log(pos_2)
     }, [api_2.velocity])
 
     const pos_2 = useRef([0, 0, 0])
     useEffect(() => {
         api_2.position.subscribe((p) => pos_2.current = p)
-        console.log(pos_2)
     }, [api_2.position])
 
     useFrame(() => {
@@ -46,8 +46,13 @@ const Hurdle = () => {
             .applyEuler(camera.rotation)
 
             api_2.velocity.set(direction.x,vel_2.current[1],direction.z)
+        // console.log(pos_2)
+
+
     })
     const {camera} = useThree()
+    const itemPos = [Math.round(pos_2.current[0]), Math.round(pos_2.current[1]), Math.round(pos_2.current[2])];
+    console.log(itemPos)
 
     return (
         <>
