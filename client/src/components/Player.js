@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { MeshBasicMaterial } from "three";
 import { useBox } from "@react-three/cannon";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Vector3 } from "three";

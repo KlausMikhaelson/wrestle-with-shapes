@@ -3,8 +3,6 @@ import React, { useRef, useEffect } from "react";
 import { useKeyboard } from "../hooks/Keyboard";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
-// import { useHistory } from 'react-router-dom';
-import {Navigate, useNavigate} from "react-router-dom"
 
 const speed_2 = 4
 
