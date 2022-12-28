@@ -15,12 +15,22 @@ const io = new Server(server, {
     }
 })
 
+let clients = {}
+
 io.on("connection", (socket) => {
     console.log(`User with user id ${socket.id} has been connected`)
 
-    socket.on("new_player", (p) => {
-        socket.emit("msg_received", p)
+    clients[socket.id] = {
+        position: [4, 5, 3]
+    }
+
+    io.emit('player', clients)
+
+    socket.on("player", ({id, position}) => {
+        clients[id].position = position
+        console.log(clients[id].position)
     })
+
 })
 
 server.listen(3001, () => console.log("server is running"))

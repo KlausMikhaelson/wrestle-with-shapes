@@ -3,6 +3,10 @@ import React, { useRef, useEffect } from "react";
 import { useKeyboard } from "../hooks/Keyboard";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
+import { io } from "socket.io-client";
+
+const socket = io.connect("http://localhost:3001")
+
 
 const speed_2 = 4
 
@@ -10,6 +14,7 @@ const speed_2 = 4
 const Hurdle = () => {
     
     // const navigate = useNavigate();
+    const { id } = socket
 
     const [ref, api_2] = useBox(() => ({
         mass: 1,
@@ -52,6 +57,13 @@ const Hurdle = () => {
         // console.log(pos_2)
 
 
+    })
+
+    const posArray = pos_2.current
+
+    socket.emit("player", {
+        id,
+        position: posArray
     })
     const {camera} = useThree()
     const itemPos = [Math.round(pos_2.current[0]), Math.round(pos_2.current[1]), Math.round(pos_2.current[2])];
