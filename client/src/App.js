@@ -12,12 +12,14 @@ import { Suspense, useEffect } from 'react';
 import { Html } from '@react-three/drei';
 // const socket = io.connect("http://localhost:3001")
 
-ReactGA.initialize('G-XQ7TKF8X99')
 
 function App() {
 
+  
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search)
+    ReactGA.initialize('G-XQ7TKF8X99')
+    
+    ReactGA.pageview("/")
   }, []);
 
   const envMap = useEnvironment({ path: "/environment" })
