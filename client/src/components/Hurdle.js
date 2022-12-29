@@ -1,8 +1,10 @@
 import { useBox } from "@react-three/cannon";
 import React, { useRef, useEffect, useState } from "react";
 import { useKeyboard } from "../hooks/Keyboard";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree , useLoader} from "@react-three/fiber";
 import { Vector3 } from "three";
+import {TextureLoader} from "three/src/loaders/TextureLoader"
+import { NearestFilter, RepeatWrapping } from "three";
 import { io } from "socket.io-client";
 import {useHref, useNavigate} from "react-router-dom"
 
@@ -14,6 +16,12 @@ const speed_2 = 4
 
 const Hurdle = () => {
     // const [setClients, clients] = useState({})
+
+    const Player2 = useLoader(TextureLoader, 'texture1.jpg')
+    Player2.wrapS = RepeatWrapping
+    Player2.wrapT = RepeatWrapping
+    Player2.repeat.set(1,1)
+
     const { id } = socket
 
     const [ref, api_2] = useBox(() => ({
@@ -29,15 +37,6 @@ const Hurdle = () => {
         console.log(pos_2)
     }, [api_2.velocity])
 
-    const Won = () => {
-        return(
-            <>
-            <h1>
-                You won
-            </h1>
-            </>
-        )
-    }
 
     const pos_2 = useRef([0, 0, 0])
     useEffect(() => {
@@ -102,7 +101,7 @@ const Hurdle = () => {
         <>
             <mesh ref={ref}>
                 <boxBufferGeometry attach="geometry" />
-                <meshStandardMaterial color="blue" attach='material' />
+                <meshStandardMaterial map={Player2} color="hotpink" attach='material' />
             </mesh>
         </>
     )

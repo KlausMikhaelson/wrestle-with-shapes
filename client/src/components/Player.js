@@ -1,13 +1,20 @@
 import React, { useEffect, useRef } from "react";
 import { useBox } from "@react-three/cannon";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree, useLoader } from "@react-three/fiber";
 import { Vector3 } from "three";
+import {NearestFilter, RepeatWrapping} from "three"
 import { useKeyboard } from "../hooks/Keyboard";
+import {TextureLoader} from "three/src/loaders/TextureLoader"
 
 
 const speed = 4
 
 const Player = () => {
+
+    const player1 = useLoader(TextureLoader, 'texture.jpg')
+    player1.wrapS = RepeatWrapping
+    player1.wrapT = RepeatWrapping
+    player1.repeat.set(1, 1)
 
     const [ref, api] = useBox(() => ({
         mass: 1,
@@ -63,7 +70,7 @@ const Player = () => {
         <>
             <mesh ref={ref}>
                 <boxBufferGeometry attach="geometry" />
-                <meshStandardMaterial color="Red" attach='material' />
+                <meshStandardMaterial map={player1} color="#202020" attach='material' />
             </mesh>
         </>
     )
