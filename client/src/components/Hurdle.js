@@ -4,6 +4,7 @@ import { useKeyboard } from "../hooks/Keyboard";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
 import { io } from "socket.io-client";
+import {useHref, useNavigate} from "react-router-dom"
 
 const socket = io.connect("http://localhost:3001")
 
@@ -13,7 +14,6 @@ const speed_2 = 4
 
 const Hurdle = () => {
     // const [setClients, clients] = useState({})
-    // const navigate = useNavigate();
     const { id } = socket
 
     const [ref, api_2] = useBox(() => ({
@@ -28,6 +28,16 @@ const Hurdle = () => {
         api_2.velocity.subscribe((v) => vel_2.current = v)
         console.log(pos_2)
     }, [api_2.velocity])
+
+    const Won = () => {
+        return(
+            <>
+            <h1>
+                You won
+            </h1>
+            </>
+        )
+    }
 
     const pos_2 = useRef([0, 0, 0])
     useEffect(() => {
@@ -73,10 +83,11 @@ const Hurdle = () => {
         itemPos[1] < 0
         ) {
         console.log("Blue lose")
-        alert("Red Won")
+        alert("Red won, Enter to restart")
+        window.location.reload()
+        
     }
 
-    let client = {}
     socket.on('player', (clients) => {
         // console.log(data)
         // const newPos = data
