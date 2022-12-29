@@ -7,8 +7,10 @@ import { TextureLoader } from "three/src/loaders/TextureLoader"
 import { NearestFilter, RepeatWrapping } from "three";
 import { io } from "socket.io-client";
 import {Text} from "@react-three/drei"
+import ReactGA from "react-ga"
 
 const socket = io.connect("http://localhost:3001")
+ReactGA.pageview(window.location.pathname + window.location.search)
 
 
 const speed_2 = 4
