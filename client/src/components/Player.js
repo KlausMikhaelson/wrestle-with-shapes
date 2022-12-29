@@ -2,9 +2,10 @@ import React, { useEffect, useRef } from "react";
 import { useBox } from "@react-three/cannon";
 import { useFrame, useThree, useLoader } from "@react-three/fiber";
 import { Vector3 } from "three";
-import {NearestFilter, RepeatWrapping} from "three"
+import {RepeatWrapping} from "three"
 import { useKeyboard } from "../hooks/Keyboard";
 import {TextureLoader} from "three/src/loaders/TextureLoader"
+import { Text } from "@react-three/drei"; 
 
 
 const speed = 4
@@ -71,6 +72,11 @@ const Player = () => {
             <mesh ref={ref}>
                 <boxBufferGeometry attach="geometry" />
                 <meshStandardMaterial map={player1} color="#202020" attach='material' />
+                <Text
+                    position={[0, 1, 0]}
+                    color="black"
+                    anchorX="center"
+                    anchorY="middle">Player2</Text>
             </mesh>
         </>
     )
