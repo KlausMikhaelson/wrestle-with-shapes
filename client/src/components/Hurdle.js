@@ -13,6 +13,7 @@ const socket = io.connect("http://localhost:3001")
 
 const speed_2 = 4
 
+const name2 = prompt("What shuld I call you player-2 ?")
 
 const Hurdle = () => {
     // const [setClients, clients] = useState({})
@@ -106,7 +107,7 @@ const Hurdle = () => {
                     position={[0, 1, 0]}
                     color="black"
                     anchorX="center"
-                    anchorY="middle">Player1</Text>
+                    anchorY="middle">{name2}</Text>
             </mesh>
         </>
     )
