@@ -18,7 +18,7 @@ const io = new Server(server, {
 let clients = {}
 
 io.on("connection", (socket) => {
-    console.log(`User with user id ${socket.id} has been connected`)
+    console.log(`User with user id ${socket.id} has been connected, active users are ${io.engine.clientsCount}`)
 
     clients[socket.id] = {
         position: [4, 5, 3]
@@ -29,6 +29,11 @@ io.on("connection", (socket) => {
     socket.on("player", ({id, position}) => {
         clients[id].position = position
         console.log(clients[id].position)
+        io.emit('player', clients)
+    })
+
+    socket.on('disconnect', () => {
+        console.log(`User ${socket.id} disconnected, ${io.engine.clientsCount}`)
     })
 
 })
