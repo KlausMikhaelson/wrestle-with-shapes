@@ -19,7 +19,7 @@ const Hurdle = () => {
     const [ref, api_2] = useBox(() => ({
         mass: 1,
         type: "Dynamic",
-        position: [4, 5, 3]
+        position: [4, 8, 3]
     }))
     
     const vel_2 = useRef([0,0,0])
@@ -68,7 +68,10 @@ const Hurdle = () => {
     const {camera} = useThree()
     const itemPos = [Math.round(pos_2.current[0]), Math.round(pos_2.current[1]), Math.round(pos_2.current[2])];
     console.log(itemPos)
-    if(itemPos[2] > 10 || itemPos[0] > 10 || itemPos[2] < -10 || itemPos[0] < -10) {
+    if(
+        // itemPos[2] > 10 || itemPos[0] > 10 || itemPos[2] < -10 || itemPos[0] < -10
+        itemPos[1] < 0
+        ) {
         console.log("Blue lose")
         alert("Red Won")
     }
