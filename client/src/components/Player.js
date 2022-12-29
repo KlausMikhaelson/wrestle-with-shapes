@@ -44,16 +44,17 @@ const Player = () => {
             .multiplyScalar(speed)
             .applyEuler(camera.rotation)
 
-            api.velocity.set(direction.x,vel.current[1],direction.z)
+        api.velocity.set(direction.x, vel.current[1], direction.z)
     })
     const itemPos_2 = [Math.round(pos.current[0]), Math.round(pos.current[1]), Math.round(pos.current[2])];
     console.log(itemPos_2)
-    if(
+    if (
         // itemPos_2[2] > 10 || itemPos_2[0] > 10 || itemPos_2[2] < -10 || itemPos_2[0] < -10
         itemPos_2[1] < 0
-        ) {
+    ) {
         console.log("Red lose")
-        alert("Blue Won")
+        alert("Blue won, Enter to restart")
+        window.location.reload()
     }
 
     const { camera } = useThree()
