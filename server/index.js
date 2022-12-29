@@ -34,6 +34,8 @@ io.on("connection", (socket) => {
 
     socket.on('disconnect', () => {
         console.log(`User ${socket.id} disconnected, ${io.engine.clientsCount}`)
+
+        delete clients[socket.id]
     })
 
 })
