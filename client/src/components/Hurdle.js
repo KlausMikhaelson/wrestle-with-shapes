@@ -68,7 +68,10 @@ const Hurdle = () => {
     const {camera} = useThree()
     const itemPos = [Math.round(pos_2.current[0]), Math.round(pos_2.current[1]), Math.round(pos_2.current[2])];
     console.log(itemPos)
-    if(itemPos[2] > 10 || itemPos[0] > 10 || itemPos[2] < -10 || itemPos[0] < -10) {
+    if(
+        // itemPos[2] > 10 || itemPos[0] > 10 || itemPos[2] < -10 || itemPos[0] < -10
+        itemPos[1] < 0
+        ) {
         console.log("Blue lose")
         alert("Red Won")
     }
