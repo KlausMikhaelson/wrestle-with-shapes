@@ -83,7 +83,7 @@ const Hurdle = () => {
         itemPos[1] < 0
     ) {
         console.log("Blue lose")
-        alert("Red won, Enter to restart")
+        alert(`${name2} died, Enter to restart`)
         window.location.reload()
 
     }
@@ -107,7 +107,9 @@ const Hurdle = () => {
                     position={[0, 1, 0]}
                     color="black"
                     anchorX="center"
-                    anchorY="middle">{name2}</Text>
+                    anchorY="middle"
+                    fontSize="0.5"
+                    >{name2}</Text>
             </mesh>
         </>
     )

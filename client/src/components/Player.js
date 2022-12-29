@@ -10,7 +10,7 @@ import { Text } from "@react-three/drei";
 
 const speed = 4
 
-const name1 = prompt("Player1 name ?")
+const name1 = prompt("What should I call you player-1 ?")
 
 const Player = () => {
 
@@ -64,7 +64,7 @@ const Player = () => {
         itemPos_2[1] < 0
     ) {
         console.log("Red lose")
-        alert("Blue won, Enter to restart")
+        alert(`${name1} died, Enter to restart`)
         window.location.reload()
     }
 
@@ -77,9 +77,11 @@ const Player = () => {
                 <meshStandardMaterial map={player1} color="#202020" attach='material' />
                 <Text
                     position={[0, 1, 0]}
-                    color="white"
+                    color="hotpink"
                     anchorX="center"
-                    anchorY="middle">{name1}</Text>
+                    anchorY="middle"
+                    fontSize="0.5"
+                    >{name1}</Text>
             </mesh>
         </>
     )
