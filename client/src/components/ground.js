@@ -1,14 +1,14 @@
 import React from 'react'
-import { usePlane } from '@react-three/cannon'
+import { useBox, usePlane } from '@react-three/cannon'
 
 const Ground = () => {
-	const [ref] = usePlane(() => ({
-		rotation: [-Math.PI / 2, 0, 0], position: [0, 4, 0], mass: 10, type: "Static"
+	const [ref] = useBox(() => ({
+		rotation: [-Math.PI / 2, 0, 0], position: [0, 0, 0], mass: 10, type: "Static", args: [20, 20]
 	}))
     
   return (
     <mesh ref={ref}>
-        <planeBufferGeometry attach='geometry' args={[20, 20]} /> 
+        <boxBufferGeometry attach='geometry' args={[20, 20, 0]} /> 
         <meshStandardMaterial color="hotpink" attach='material'/>
     </mesh>
   )

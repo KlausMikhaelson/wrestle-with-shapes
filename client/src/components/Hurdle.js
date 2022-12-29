@@ -19,7 +19,7 @@ const Hurdle = () => {
     const [ref, api_2] = useBox(() => ({
         mass: 1,
         type: "Dynamic",
-        position: [4, 5, 3]
+        position: [4, 8, 3]
     }))
     
     const vel_2 = useRef([0,0,0])
