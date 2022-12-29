@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <Canvas camera={{position:[20, 15, 0]}}>
+      <Canvas camera={{position:[0, 5, 12]}}>
         <OrbitControls />
         <ambientLight />
         <Physics>
