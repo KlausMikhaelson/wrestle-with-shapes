@@ -10,7 +10,10 @@ import { Text } from "@react-three/drei";
 
 const speed = 4
 
+const name1 = prompt("Player1 name ?")
+
 const Player = () => {
+
 
     const player1 = useLoader(TextureLoader, 'texture.jpg')
     player1.wrapS = RepeatWrapping
@@ -74,9 +77,9 @@ const Player = () => {
                 <meshStandardMaterial map={player1} color="#202020" attach='material' />
                 <Text
                     position={[0, 1, 0]}
-                    color="black"
+                    color="white"
                     anchorX="center"
-                    anchorY="middle">Player2</Text>
+                    anchorY="middle">{name1}</Text>
             </mesh>
         </>
     )
