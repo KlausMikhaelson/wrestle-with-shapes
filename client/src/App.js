@@ -8,14 +8,17 @@ import { Physics } from '@react-three/cannon';
 import Hurdle from './components/Hurdle';
 import { useEnvironment } from '@react-three/drei';
 import ReactGA from "react-ga"
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Html } from '@react-three/drei';
 // const socket = io.connect("http://localhost:3001")
 
 ReactGA.initialize('G-XQ7TKF8X99')
-ReactGA.pageview(window.location.pathname + window.location.search)
 
 function App() {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search)
+  });
 
   const envMap = useEnvironment({ path: "/environment" })
 
