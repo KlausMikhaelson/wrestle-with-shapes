@@ -1,5 +1,5 @@
 import { useBox } from "@react-three/cannon";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useKeyboard } from "../hooks/Keyboard";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Vector3 } from "three";
@@ -12,7 +12,7 @@ const speed_2 = 4
 
 
 const Hurdle = () => {
-    
+    // const [setClients, clients] = useState({})
     // const navigate = useNavigate();
     const { id } = socket
 
@@ -75,6 +75,17 @@ const Hurdle = () => {
         console.log("Blue lose")
         alert("Red Won")
     }
+
+    let client = {}
+    socket.on('player', (clients) => {
+        // console.log(data)
+        // const newPos = data
+        // console.log(newPos)
+        console.log(clients)
+    })
+
+    // const {newPos} = clients
+    // console.log(newPos)
 
     return (
         <>
