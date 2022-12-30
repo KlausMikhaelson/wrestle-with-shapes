@@ -10,6 +10,7 @@ import { useEnvironment } from '@react-three/drei';
 import ReactGA from "react-ga"
 import { Suspense, useEffect } from 'react';
 import { Html } from '@react-three/drei';
+import Ball from './components/Ball';
 // const socket = io.connect("http://localhost:3001")
 
 
@@ -28,9 +29,10 @@ function App() {
     <div className="App">
       <Canvas camera={{ position: [0, 5, 12] }}>
         <Suspense fallback={<Html><h1>Loading...</h1></Html>}>
-          <OrbitControls />
+          <OrbitControls enableZoom={false}/>
           <ambientLight />
           <Physics>
+            {/* <Ball /> */}
             <Hurdle />
             <Player />
             <Ground />
