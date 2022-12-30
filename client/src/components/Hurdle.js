@@ -13,7 +13,7 @@ const socket = io.connect("http://localhost:3001")
 
 const speed_2 = 4
 
-const name2 = prompt("What shuld I call you player-2 ?")
+const name2 = prompt("What should I call you player-2 ?")
 
 const Hurdle = () => {
     // const [setClients, clients] = useState({})
