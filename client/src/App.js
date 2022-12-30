@@ -29,10 +29,10 @@ function App() {
     <div className="App">
       <Canvas camera={{ position: [0, 5, 12] }}>
         <Suspense fallback={<Html><h1>Loading...</h1></Html>}>
-          <OrbitControls />
+          <OrbitControls enableZoom={false}/>
           <ambientLight />
           <Physics>
-            <Ball />
+            {/* <Ball /> */}
             <Hurdle />
             <Player />
             <Ground />

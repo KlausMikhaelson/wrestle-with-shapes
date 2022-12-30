@@ -1,9 +1,9 @@
 import React from "react";
-import { useBox, useSphere } from "@react-three/cannon";
+import { useSphere } from "@react-three/cannon";
 
 const Ball = () => {
 
-    const [ref, api_2] = useSphere(() => ({
+    const [ref] = useSphere(() => ({
         mass: 1,
         type: "Dynamic",
         position: [2, 8, 3],
