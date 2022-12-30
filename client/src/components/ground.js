@@ -12,12 +12,12 @@ const Ground = () => {
   PlaneG.repeat.set(20,20)
 
 	const [ref] = useBox(() => ({
-		rotation: [-Math.PI / 2, 0, 0], position: [0, 0, 0], mass: 10, type: "Static", args: [15, 15]
+		rotation: [-Math.PI / 2, 0, 0], position: [0, 0, 0], mass: 10, type: "Static", args: [15, 15, 2, 1]
 	}))
     
   return (
     <mesh ref={ref}>
-        <boxBufferGeometry attach='geometry' args={[15, 15, 0]} /> 
+        <boxBufferGeometry attach='geometry' args={[15, 15, 2, 1]} /> 
         <meshStandardMaterial map={PlaneG} attach='material'/>
     </mesh>
   )

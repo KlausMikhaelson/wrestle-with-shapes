@@ -32,8 +32,8 @@ function App() {
           <OrbitControls />
           <ambientLight />
           <Physics>
-            <Hurdle />
             <Ball />
+            <Hurdle />
             <Player />
             <Ground />
           </Physics>
