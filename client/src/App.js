@@ -10,6 +10,7 @@ import { useEnvironment } from '@react-three/drei';
 import ReactGA from "react-ga"
 import { Suspense, useEffect } from 'react';
 import { Html } from '@react-three/drei';
+import Ball from './components/Ball';
 // const socket = io.connect("http://localhost:3001")
 
 
@@ -32,6 +33,7 @@ function App() {
           <ambientLight />
           <Physics>
             <Hurdle />
+            <Ball />
             <Player />
             <Ground />
           </Physics>
