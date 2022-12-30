@@ -29,7 +29,7 @@ function App() {
     <div className="App">
       <Canvas camera={{ position: [0, 5, 12] }}>
         <Suspense fallback={<Html><h1>Loading...</h1></Html>}>
-          <OrbitControls enableZoom={false}/>
+          <OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2.3}/>
           <ambientLight />
           <Physics>
             {/* <Ball /> */}

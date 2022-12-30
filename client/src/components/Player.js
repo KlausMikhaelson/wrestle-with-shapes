@@ -5,7 +5,7 @@ import { Vector3 } from "three";
 import {RepeatWrapping} from "three"
 import { useKeyboard } from "../hooks/Keyboard";
 import {TextureLoader} from "three/src/loaders/TextureLoader"
-import { Text } from "@react-three/drei"; 
+import { Html, Text } from "@react-three/drei"; 
 
 
 const speed = 4
@@ -73,15 +73,19 @@ const Player = () => {
     return (
         <>
             <mesh ref={ref}>
+                <Html>
+                <p style={{padding: "5px"}}>{name1}</p>
+                </Html>
+
                 <boxBufferGeometry attach="geometry" />
                 <meshStandardMaterial map={player1} color="#202020" attach='material' />
-                <Text
+                {/* <Text
                     position={[0, 1, 0]}
                     color="hotpink"
                     anchorX="center"
                     anchorY="middle"
                     fontSize="0.5"
-                    >{name1}</Text>
+                    >{name1}</Text> */}
             </mesh>
         </>
     )
