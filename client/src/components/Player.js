@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from "react";
 import { useBox } from "@react-three/cannon";
 import { useFrame, useThree, useLoader } from "@react-three/fiber";
 import { Vector3 } from "three";
-import {RepeatWrapping} from "three"
+import { RepeatWrapping } from "three"
 import { useKeyboard } from "../hooks/Keyboard";
-import {TextureLoader} from "three/src/loaders/TextureLoader"
-import { Html, Text } from "@react-three/drei"; 
+import { TextureLoader } from "three/src/loaders/TextureLoader"
+import { Html, Text } from "@react-three/drei";
 
 
 const speed = 4
@@ -74,7 +74,7 @@ const Player = () => {
         <>
             <mesh ref={ref}>
                 <Html>
-                <p style={{padding: "5px"}}>{name1}</p>
+                    <p style={{ padding: "5px", color: "hotpink" }}>{name1}</p>
                 </Html>
 
                 <boxBufferGeometry attach="geometry" />
