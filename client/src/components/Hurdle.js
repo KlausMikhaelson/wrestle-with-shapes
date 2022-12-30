@@ -6,7 +6,7 @@ import { Vector3 } from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader"
 import { NearestFilter, RepeatWrapping } from "three";
 import { io } from "socket.io-client";
-import {Text} from "@react-three/drei"
+import { Html, Text } from "@react-three/drei"
 
 const socket = io.connect("http://localhost:3001")
 
@@ -100,16 +100,21 @@ const Hurdle = () => {
 
     return (
         <>
+
             <mesh ref={ref}>
+            <Html>
+                <p style={{padding: "5px"}}>{name2}</p>
+            </Html>
                 <boxBufferGeometry attach="geometry" />
                 <meshStandardMaterial map={Player2} color="hotpink" attach='material' />
-                <Text
+                {/* <Text
                     position={[0, 1, 0]}
                     color="black"
                     anchorX="center"
                     anchorY="middle"
-                    fontSize="0.5"
-                    >{name2}</Text>
+                    fontSize="0.4"
+                    
+                    >{name2}</Text> */}
             </mesh>
         </>
     )
