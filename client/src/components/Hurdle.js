@@ -13,7 +13,10 @@ const socket = io.connect("http://localhost:3001")
 
 const speed_2 = 4
 
-const name2 = prompt("What should I call you player-2 ?")
+do{
+    var name2 = prompt("What should I call you player-2 ?").trim()
+} while (name2 !== null && name2 === "")
+
 
 const Hurdle = () => {
     // const [setClients, clients] = useState({})
@@ -102,9 +105,9 @@ const Hurdle = () => {
         <>
 
             <mesh ref={ref}>
-            <Html>
-                <p style={{padding: "5px"}}>{name2}</p>
-            </Html>
+                <Html>
+                    <p style={{ padding: "5px" }}>{name2}</p>
+                </Html>
                 <boxBufferGeometry attach="geometry" />
                 <meshStandardMaterial map={Player2} color="hotpink" attach='material' />
                 {/* <Text
