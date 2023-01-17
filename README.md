@@ -25,7 +25,11 @@ The game is easy to play and perfect for a quick break or for a fun gaming night
 8. Enjoy the game!
 
 ## Built With :
-[Cannon.js](https://github.com/schteppe/cannon.js) - a physics engine written in JavaScript
++ [Cannon.js](https://github.com/schteppe/cannon.js) - a physics engine written in JavaScript
++ Cannon.js is an open source JavaScript 3D physics engine created by [Stefan "schteppe" Hedman](https://github.com/schteppe)
++ Unlike physics engine libraries ported from C++ to JavaScript, cannon.js is written in JavaScript from the start and can take advantage of its features.
++ The physics engine implements rigid-body dynamics, discrete collision detection, and a Gauss-Seidel constraint solver.
+
 
 ## Contribution :
 Since now it is open sourced, you can contribute to it by creating new issues or contribute to the existing ones.
