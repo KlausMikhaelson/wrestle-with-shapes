@@ -11,7 +11,7 @@ import { Html, Text } from "@react-three/drei";
 const speed = 4
 
 do{
-    var name1 = prompt("What should I call you player-1 ?").trim()
+    var name1 = prompt("What should I call you player-1 ?")
 } while (name1 !== null && name1 === "")
 
 const Player = () => {
