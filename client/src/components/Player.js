@@ -5,15 +5,11 @@ import { Vector3 } from "three";
 import { RepeatWrapping } from "three";
 import { useKeyboard } from "../hooks/Keyboard";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { Html, Text } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 const speed = 4;
 
-// do {
-//   var name1 = prompt("What should I call you player-1 ?").trim();
-// } while (name1 !== null && name1 === "");
-
-const Player = ({ socket }) => {
+const Player = ({ socket, playerId }) => {
   const player1 = useLoader(TextureLoader, "texture.jpg");
   player1.wrapS = RepeatWrapping;
   player1.wrapT = RepeatWrapping;
@@ -25,18 +21,21 @@ const Player = ({ socket }) => {
     position: [0, 4, 3],
   }));
   const vel = useRef([0, 0, 0]);
-  const { stepBackward, stepForward, stepRight, stepLeft, jump } =
-    useKeyboard();
+  const { stepBackward, stepForward, stepRight, stepLeft } = useKeyboard();
+
   useEffect(() => {
     api.velocity.subscribe((v) => (vel.current = v));
   }, [api.velocity]);
 
   const pos = useRef([0, 0, 0]);
+
   useEffect(() => {
     api.position.subscribe((p) => (pos.current = p));
   }, [api.position]);
 
   useFrame(() => {
+    if (playerId !== socket.id) return; // Only handle controls for the current player
+
     const direction = new Vector3();
     const frontVector = new Vector3(
       0,
@@ -56,39 +55,41 @@ const Player = ({ socket }) => {
       .applyEuler(camera.rotation);
 
     api.velocity.set(direction.x, vel.current[1], direction.z);
+
+    socket.emit("playerPosition", {
+      playerId: socket.id,
+      position: pos.current,
+    });
   });
-  const itemPos_2 = [
-    Math.round(pos.current[0]),
-    Math.round(pos.current[1]),
-    Math.round(pos.current[2]),
-  ];
-  console.log(itemPos_2);
-  if (
-    // itemPos_2[2] > 10 || itemPos_2[0] > 10 || itemPos_2[2] < -10 || itemPos_2[0] < -10
-    itemPos_2[1] < 0
-  ) {
-    console.log("Red lose");
-    window.location.reload();
-  }
 
   const { camera } = useThree();
+
+  useEffect(() => {
+    socket.on("playerPosition", (data) => {
+      const { playerId, position } = data;
+
+      if (playerId === playerId) return; // Ignore position updates for the current player
+
+      api.position.set(position[0], position[1], position[2]);
+    });
+
+    return () => {
+      socket.off("playerPosition");
+    };
+  }, [api.position, playerId, socket]);
 
   return (
     <>
       <mesh ref={ref}>
         <Html>
-          <p style={{ padding: "5px", color: "hotpink" }}>{"Yooo"}</p>
+          <p style={{ padding: "5px", color: "hotpink" }}>Player {playerId}</p>
         </Html>
-
         <boxBufferGeometry attach="geometry" />
-        <meshStandardMaterial map={player1} color="#202020" attach="material" />
-        {/* <Text
-                    position={[0, 1, 0]}
-                    color="hotpink"
-                    anchorX="center"
-                    anchorY="middle"
-                    fontSize="0.5"
-                    >{name1}</Text> */}
+        <meshStandardMaterial
+          map={player1}
+          color="#202020"
+          attach="material"
+        />
       </mesh>
     </>
   );
