@@ -13,7 +13,7 @@ import { Html } from "@react-three/drei";
 function App() {
   const socketRef = useRef(null);
   const [playerId, setPlayerId] = useState(null);
-  const [otherPlayers, setOtherPlayers] = useState({});
+  const [otherPlayers, setOtherPlayers] = useState([]);
 
   useEffect(() => {
     ReactGA.initialize("G-XQ7TKF8X99");
@@ -22,6 +22,11 @@ function App() {
     const socket = io("http://localhost:3001");
     socketRef.current = socket;
 
+    // socket.on("disconnect", (players) => {
+    //   console.log("Disconnected from server.");
+    //   setOtherPlayers(players)
+    // })
+
     socket.on("connect", () => {
       console.log("Connected to server.");
       socket.emit("joinGame");
@@ -29,40 +34,62 @@ function App() {
 
     socket.on("newPlayer", (playerData) => {
       console.log("New player joined:", playerData);
-      setOtherPlayers((otherPlayers) => ({
-        ...otherPlayers,
-        [playerData.id]: playerData,
-      }));
+      // setTimeout(() => {
+      //   setOtherPlayers((otherPlayers) => ({
+      //     ...otherPlayers,
+      //     playerData,
+      //   }));
+      // }, 3000)
     });
-
+    // setOtherPlayers([...otherPlayers, playerData]);
     socket.on("playerData", (data) => {
       const { playerId, players } = data;
       console.log("Received player data:", data);
-      setPlayerId(playerId);
-      setOtherPlayers(players);
+      setOtherPlayers(data.players);
+      // setOtherPlayers((Players) => ({
+      //   ...Players,
+      //   data,
+      // }));
     });
+    // });
 
     return () => {
       socket.disconnect();
     };
   }, []);
 
+  useEffect(() => {
+    const something =  otherPlayers.players
+    console.log(otherPlayers, "playerlist");
+  }, [otherPlayers]);
+
   const envMap = useEnvironment({ path: "/environment" });
 
   return (
     <div className="App">
       <Canvas camera={{ position: [0, 5, 12] }}>
-        <Suspense fallback={<Html><h1>Loading...</h1></Html>}>
-          <OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2.3}/>
+        <Suspense
+          fallback={
+            <Html>
+              <h1>Loading...</h1>
+            </Html>
+          }
+        >
+          <OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2.3} />
           <ambientLight />
           <Physics>
-            {Object.keys(otherPlayers).map((playerId) => (
-              <Player
-                key={playerId}
-                socket={socketRef.current}
-                playerId={playerId}
-              />
-            ))}
+            {otherPlayers &&
+              otherPlayers.map((playerId) => {
+                const something = playerId
+                console.log(something,"playerId")
+                return(
+                  <Player
+                    key={playerId.playerId}
+                    playerInfo={playerId}
+                    socket={socketRef.current}
+                  />
+                )
+              })}
             {playerId && (
               <Player socket={socketRef.current} playerId={playerId} />
             )}
