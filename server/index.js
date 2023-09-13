@@ -22,7 +22,7 @@ io.on("connection", (socket) => {
     position: generateRandomPosition(),
   });
   io.emit("playerData", {
-    players
+    players,
   });
 
   console.log("Total players:", Object.keys(players).length);
@@ -34,6 +34,9 @@ io.on("connection", (socket) => {
     delete players[socket.id];
     socket.broadcast.emit("playerDisconnected", socket.id);
     players = players.filter((player) => player.playerId !== socket.id);
+    io.emit("playerData", {
+      players,
+    });
 
     console.log("Total players:", Object.keys(players).length);
   });

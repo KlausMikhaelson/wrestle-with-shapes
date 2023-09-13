@@ -17,15 +17,11 @@ const Player = ({ socket, playerId, playerInfo }) => {
   player1.repeat.set(1, 1);
 
   const [ref, api] = useBox(() => ({
-    // mass: 1,
+    mass: 1,
     type: "Dynamic",
-    position: 
-    // [0, 4, 0] 
-    [
-      playerInfo.position[0],
-      playerInfo.position[1],
-      playerInfo.position[2],
-    ],
+    position:
+      // [0, 4, 0]
+      [playerInfo.position[0], playerInfo.position[1], playerInfo.position[2]],
   }));
   const vel = useRef([0, 0, 0]);
   const { stepBackward, stepForward, stepRight, stepLeft } = useKeyboard();
@@ -63,10 +59,9 @@ const Player = ({ socket, playerId, playerInfo }) => {
 
     api.velocity.set(direction.x, vel.current[1], direction.z);
 
-    // socket.emit("playerPosition", {
-    //   playerId: socket.id,
-    //   position: pos.current,
-    // });
+    socket.emit("playerPosition", {
+      position: pos.current,
+    });
   });
 
   const { camera } = useThree();
